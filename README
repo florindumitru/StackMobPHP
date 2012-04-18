@@ -1,0 +1,67 @@
+This is a simple PHP class to connect to StackMob APIs
+
+
+How to use:
+
+1) Configure variables 
+
+please change 
+
+YOUR-CONSUMER-KEY
+YOUR-CONSUMER-SECRET
+YOURAPP
+
+with values you can find here: https://www.stackmob.com/platform/account/apps/reset
+
+define('CONSUMER_KEY', 'YOUR-CONSUMER-KEY');
+define('CONSUMER_SECRET', 'YOUR-CONSUMER-SECRET');
+
+define('API_URL_GET', 'http://api.mob1.stackmob.com/api/0/YOURAPP');
+define('API_URL_PUT', 'http://api.mob1.stackmob.com');
+define('API_URL_POST', 'http://api.mob1.stackmob.com/api/0/YOURAPP');
+define('API_URL_DELETE', 'http://api.mob1.stackmob.com/api/0/YOURAPP');
+
+
+2) Test CRUD
+
+we suppose you already created a dumb schema ("dumb") in your stackmob interface with dumb_id and name.
+
+
+<?php
+require_once('classes/StackMob.php');
+
+$SMConnector = new StackMob();
+
+
+GET:
+
+
+$response = $SMConnector->put('dumb'); //all dumb list
+$response = $SMConnector->put('dumb','dumb_unique_id'); //ony dumb_unique_id object
+
+POST:
+
+$obj = array();
+$obj[dumb_id]='dumb_unique_id';
+$obj[name]='awesome_dumb_name';
+
+$response = $SMConnector->post('dumb',$obj);
+
+
+PUT:
+
+
+$obj = array();
+$obj[dumb_id]='dumb_unique_id';
+$obj[name]='awesome_dumb_name';
+
+$response = $SMConnector->put('dumb',$obj);
+
+
+DELETE:
+
+$response = $SMConnector->delete('dumb','dumb_object_to_delete'); //to delete the object dumb_object_to_delete
+
+enjoy!
+
+
